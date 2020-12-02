@@ -14,7 +14,7 @@ const twoLoopSolution = (input) => {
 
 const oneLoopSolution = (input) => {
 	//Transform input into set (of numbers)
-	input = new Set([...input.map(i => Number(i))]);
+	input = new Set(input.map(i => Number(i)));
 
 	for (const nr of input) {
 		if (input.has(2020 - nr)) {
