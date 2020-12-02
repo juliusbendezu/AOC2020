@@ -2,17 +2,25 @@ const { fileToArr } = require('../common.js');
 
 const input = fileToArr('./input.txt')
 
-let result;
-for (let i = 0; i < input.length; i++) {
-	for (let j = 0; j < input.length; j++) {
-		if ((2020 == Number(input[i]) + Number(input[j])) && (i != j)) {
-			result = Number(input[i]) * Number(input[j]);
-			break;
+const twoLoopSolution = (input) => {
+	for (let i = 0; i < input.length; i++) {
+		for (let j = 0; j < input.length; j++) {
+			if ((2020 == Number(input[i]) + Number(input[j])) && (i != j)) {
+				return result = Number(input[i]) * Number(input[j]);
+			}
 		}
-	}
-	if (result) {
-		break;
 	}
 }
 
-console.log(result);
+const oneLoopSolution = (input) => {
+	//Transform input into set (of numbers)
+	input = new Set([...input.map(i => Number(i))]);
+
+	for (const nr of input) {
+		if (input.has(2020 - nr)) {
+			return nr * (2020 - nr);
+		}
+	}
+}
+
+console.log(oneLoopSolution(input));
