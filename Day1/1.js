@@ -1,4 +1,4 @@
-const { fileToArr } = require('../common.js');
+const { fileToArr } = require('../utils.js');
 
 const input = fileToArr('./input.txt')
 

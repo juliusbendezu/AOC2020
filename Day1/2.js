@@ -1,5 +1,5 @@
 const func = () => {
-	const { fileToArr } = require('../common.js');
+	const { fileToArr } = require('../utils.js');
 	let input = fileToArr('./input.txt')
 	input = input.map(n => Number(n));
 

@@ -8,7 +8,7 @@ const checkPassword = (policy, password) => {
 	return min <= letterCount && letterCount <= max;
 }
 
-const { fileToArr } = require('../common');
+const { fileToArr } = require('../utils');
 const input = fileToArr('./input.txt');
 const { cleanInput } = require('./utils');
 

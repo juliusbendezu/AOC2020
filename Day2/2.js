@@ -6,7 +6,7 @@ const checkPassword = (policy, password) => {
 	return (password.charAt(idx1) == letter || password.charAt(idx2) == letter) && password.charAt(idx1) != password.charAt(idx2);
 }
 
-const { fileToArr } = require('../common');
+const { fileToArr } = require('../utils');
 const input = fileToArr('./input.txt');
 const { cleanInput } = require('./utils');
 
