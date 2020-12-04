@@ -40,18 +40,9 @@ const validateField = (field) => {
 	return rules.get(field[0])(field[1]);
 }
 
-const hasAllFields = (passport) => {
-	if (8 == passport.length) {
-		return true;
-	} else if (7 == passport.length) {
-		return !passport.join().includes('cid');
-	} else {
-		return false;
-	}
-}
-
 const solution = () => {
 	const { fileToArr } = require('../utils');
+	const { hasAllFields } = require('./utils');
 	const input = fileToArr('./input.txt', '\n\n');
 	const passports = input.map((str) => str.replace(/\n/g, ' ').split(' '));
 
