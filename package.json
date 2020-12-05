@@ -1,0 +1,19 @@
+{
+  "name": "aoc2020",
+  "version": "1.0.0",
+  "description": "Advent of Code 2020",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juliusbendezu/AOC2020.git"
+  },
+  "author": "Julius Bendezu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juliusbendezu/AOC2020/issues"
+  },
+  "homepage": "https://github.com/juliusbendezu/AOC2020#readme"
+}
