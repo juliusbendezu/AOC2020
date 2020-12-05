@@ -15,4 +15,12 @@ const seatId = (row, col) => {
 	return row * 8 + col;
 }
 
-module.exports = { findSeat, seatId }
+const findSeatId = (boardingPass) => {
+	let row = boardingPass.substring(0, 7);
+	let col = boardingPass.substring(7);
+	row = findSeat(row, { min: 0, max: 127 });
+	col = findSeat(col, { min: 0, max: 7 });
+	return seatId(row, col);
+}
+
+module.exports = { findSeat, seatId, findSeatId }
