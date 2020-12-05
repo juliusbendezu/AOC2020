@@ -15,10 +15,10 @@ const seatId = (row, col) => {
 	return row * 8 + col;
 }
 
-const findSeatId = (boardingPass) => {
+const findSeatId = (boardingPass, startRowRange = { min: 0, max: 127 }) => {
 	let row = boardingPass.substring(0, 7);
 	let col = boardingPass.substring(7);
-	row = findSeat(row, { min: 0, max: 127 });
+	row = findSeat(row, startRowRange);
 	col = findSeat(col, { min: 0, max: 7 });
 	return seatId(row, col);
 }
