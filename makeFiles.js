@@ -5,8 +5,8 @@ const path = `./Day${today}`;
 
 try {
 	fs.mkdirSync(path);
-	fs.openSync(`${path}/1.js`, 'w');
-	fs.openSync(`${path}/2.js`, 'w');
+	fs.writeFileSync(`${path}/1.js`, '\n\nmodule.exports = solution');
+	fs.writeFileSync(`${path}/2.js`, '\n\nmodule.exports = solution');
 	fs.openSync(`${path}/input.txt`, 'w');
 	fs.openSync(`${path}/problem.txt`, 'w');
 } catch (err) {
