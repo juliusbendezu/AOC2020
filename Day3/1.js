@@ -8,6 +8,4 @@ const solution = () => {
 	return traverseSlope(stepsRight, stepsDown, input)
 }
 
-console.time('time');
-console.log(solution());
-console.timeEnd('time');
+module.exports = solution;

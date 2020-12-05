@@ -1,6 +1,3 @@
-const { fileToArr } = require('../utils.js');
-
-const input = fileToArr('./input.txt')
 
 const twoLoopSolution = (input) => {
 	for (let i = 0; i < input.length; i++) {
@@ -23,4 +20,10 @@ const oneLoopSolution = (input) => {
 	}
 }
 
-console.log(oneLoopSolution(input));
+const solution = () => {
+	const { fileToArr } = require('../utils.js');
+	const input = fileToArr('./input.txt');
+	return oneLoopSolution(input);
+}
+
+module.exports = solution;

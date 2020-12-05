@@ -14,4 +14,4 @@ const func = () => {
 	}
 }
 
-console.log(func());
+module.exports = func;

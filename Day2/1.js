@@ -8,14 +8,18 @@ const checkPassword = (policy, password) => {
 	return min <= letterCount && letterCount <= max;
 }
 
-const { fileToArr } = require('../utils');
-const input = fileToArr('./input.txt');
-const { cleanInput } = require('./utils');
+const solution = () => {
 
-let count = 0;
-input.forEach(line => {
-	const { policy, password } = cleanInput(line);
-	if (checkPassword(policy, password)) count++;
-});
+	const { fileToArr } = require('../utils');
+	const input = fileToArr('./input.txt');
+	const { cleanInput } = require('./utils');
 
-console.log(count);
+	let count = 0;
+	input.forEach(line => {
+		const { policy, password } = cleanInput(line);
+		if (checkPassword(policy, password)) count++;
+	});
+	return count;
+}
+
+module.exports = solution;

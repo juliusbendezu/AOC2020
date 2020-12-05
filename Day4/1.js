@@ -7,4 +7,4 @@ const solution = () => {
 	return passports.reduce((acc, pass) => acc += hasAllFields(pass), 0);
 }
 
-console.log(solution());
+module.exports = solution;

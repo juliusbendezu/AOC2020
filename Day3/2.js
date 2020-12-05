@@ -14,6 +14,4 @@ const solution = () => {
 	return product;
 }
 
-console.time('time');
-console.log(solution());
-console.timeEnd('time');
+module.exports = solution;
