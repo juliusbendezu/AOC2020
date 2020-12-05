@@ -15,12 +15,16 @@ const seatId = (row, col) => {
 	return row * 8 + col;
 }
 
-const findSeatId = (boardingPass, startRowRange = { min: 0, max: 127 }) => {
+const findSeatId = (boardingPass) => {
 	let row = boardingPass.substring(0, 7);
 	let col = boardingPass.substring(7);
-	row = findSeat(row, startRowRange);
+	row = findSeat(row, { min: 0, max: 127 });
 	col = findSeat(col, { min: 0, max: 7 });
 	return seatId(row, col);
 }
 
-module.exports = { findSeat, seatId, findSeatId }
+const findSeatIdBin = (boardingPass) => {
+	return Number.parseInt(boardingPass.replace(/F|L/g, '0').replace(/B|R/g, '1'), 2);
+}
+
+module.exports = { findSeat, seatId, findSeatId, findSeatIdBin }
