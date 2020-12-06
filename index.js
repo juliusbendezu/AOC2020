@@ -1,4 +1,6 @@
 
+const Benchmark = require('benchmark')
+
 const runDay = (day) => {
 	const path = `Day${day}`;
 	process.chdir(`${__dirname}/${path}`);

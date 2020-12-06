@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/juliusbendezu/AOC2020/issues"
   },
-  "homepage": "https://github.com/juliusbendezu/AOC2020#readme"
+  "homepage": "https://github.com/juliusbendezu/AOC2020#readme",
+  "dependencies": {
+    "benchmark": "^2.1.4"
+  }
 }
