@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/juliusbendezu/AOC2020#readme",
   "dependencies": {
-    "benchmark": "^2.1.4"
+    "benchmark": "^2.1.4",
+    "tree-data-structure": "^0.2.0"
   }
 }
