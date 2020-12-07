@@ -2,7 +2,6 @@
 const bagContainingBag = (rule, bag = 'shiny gold') => {
 	const regex = new RegExp(bag + ' bags*(\\.|\\,)');
 	if (regex.test(rule)) {
-		console.log(rule);
 		return rule.split(' ').slice(0, 2).join(' ');
 	}
 	return null;
