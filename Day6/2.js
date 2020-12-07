@@ -8,6 +8,7 @@ const makeQuestionMap = () => {
 	return map;
 }
 
+//Using map to store and calculate common questions
 const solution = () => {
 	const { fileToArr } = require('../utils');
 	const input = fileToArr('./input.txt', '\n\n');
@@ -28,4 +29,15 @@ const solution = () => {
 	return total;
 };
 
-module.exports = solution;
+//Using array intersection with lodash
+const solution2 = () => {
+	const _ = require('lodash');
+	const { fileToArr } = require('../utils');
+	const input = fileToArr('./input.txt', '\n\n');
+
+	//groups: [ group: [ person: ['a', 'b', etc..], ..], ..]
+	const groups = input.map(group => group.split('\n').map(person => person.split('')));
+	return groups.reduce((total, group) => total + _.intersection(...group).length, 0);
+}
+
+module.exports = solution2;
