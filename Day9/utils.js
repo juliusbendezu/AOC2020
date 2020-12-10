@@ -5,7 +5,7 @@ const findInvalid = (preambleSize, arr) => {
 	const preambleSet = new Set(preambleQueue);
 
 	for (const nr of arr) {
-		console.log('nr:', nr);
+		//console.log('nr:', nr);
 		const exists = preambleQueue.find(testing => preambleSet.has(nr - testing));
 
 		if (!exists) { //Found the invalid
