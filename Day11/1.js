@@ -1,7 +1,7 @@
 
 const solution = () => {
 	const { fileToArr } = require('../utils');
-	const { deepCopy, getSeat, adjacents, noAdjacent } = require('./utils');
+	const { deepCopy, adjacents, noAdjacent } = require('./utils');
 	let seats = fileToArr('./input.txt').map(l => l.split(''));
 
 	let changing = true;
