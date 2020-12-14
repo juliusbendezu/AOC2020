@@ -1,17 +1,20 @@
 
-//Heavily based on ship.js but using new rules with waypoint
+//Based on ship.js but using new waypoint and new rules for moving
+
+const { directions } = require("./ship");
 
 class Ship {
-	static directions = new Map([
-		['E', { x: 1, y: 0 }],
-		['S', { x: 0, y: 1 }],
-		['W', { x: -1, y: 0 }],
-		['N', { x: 0, y: -1 }]
-	]);
-	static directionsArr = Array.from(Ship.directions.keys());
+	static directions = ['N', 'E', 'S', 'W'];
 	static angles = ['R', 'L'];
 
 	followJourney = false; //Logging
+
+	waypoint = new Map([
+		[directions[0], 0],
+		[directions[1], 0],
+		[directions[2], 0],
+		[directions[3], 0],
+	]);
 
 	constructor(pos, waypoint) {
 		this.pos = pos;
@@ -19,38 +22,47 @@ class Ship {
 	}
 
 	moveWaypoint(distance, dir) {
-		let prevWaypoint = { ...this.waypoint };
-		let d = Ship.directions.get(dir);
-		this.waypoint.x += (d.x * distance);
-		this.waypoint.y += (d.y * distance);
+		let prevWaypoint = [...this.waypoint];
+		this.waypoint.set(dir, this.waypoint.get(dir) + Number(distance));
 
-		if (this.followJourney) console.log(`Ships waypoint moving from { x: ${prevWaypoint.x}, y: ${prevWaypoint.y} } to { x: ${this.waypoint.x}, y: ${this.waypoint.y} } by x: ${d.x * distance}, y: ${d.y * distance}`);
+		if (this.followJourney) console.log('Ships waypoint moving from', prevWaypoint, 'to', this.waypoint);
 	}
 
 	move(distance) {
-		//Move according to waypoints values * distance
+		//N and W are negative, E and S positive
 		let prevPos = { ...this.pos };
-		this.pos.x += this.waypoint.x * distance;
-		this.pos.y += this.waypoint.y * distance;
-		if (this.followJourney) console.log(`Ship moving from { x: ${prevPos.x}, y: ${prevPos.y} } to { x: ${this.pos.x}, y: ${this.pos.y} } by x: ${this.waypoint.x * distance}, y: ${this.waypoint.y * distance}`);
+		this.pos.x += (this.waypoint.get('E') * distance) + (this.waypoint.get('W') * distance * -1);
+		this.pos.y += (this.waypoint.get('S') * distance) + (this.waypoint.get('N') * distance * -1);
+
+		if (this.followJourney) console.log(`Ship moving from { x: ${prevPos.x}, y: ${prevPos.y} } to { x: ${this.pos.x}, y: ${this.pos.y} }`);
 	}
 
 	rotate(degrees, angle) {
-		const len = Ship.directionsArr.length;
-		let d = degrees / 90; //Map degrees to index 0-3
-		let idx = Ship.directionsArr.indexOf(this.waypoint.direction);
-		idx += d * ('R' == angle ? 1 : -1); // Move 'forward' or 'back' depending on angle rotating to
-		//Handle over/underflow
-		if (len <= idx) {
-			idx -= len;
-		} else if (0 > idx) {
-			idx += len;
+		let prevWaypoint = [...this.waypoint];
+		let rotations = degrees / 90; //Map degrees to rotations 0-3
+
+		//Manual right/left rotation, coul probably do something smart by mapping the index that access directions to 1/-1 
+		if ('R' == angle) {
+			//Rotate all values from waypoint 'rotation' amount of times
+			for (let i = 0; i < rotations; i++) {
+				let tmp = this.waypoint.get(Ship.directions[3]);
+				this.waypoint.set(Ship.directions[3], this.waypoint.get(Ship.directions[2]));
+				this.waypoint.set(Ship.directions[2], this.waypoint.get(Ship.directions[1]));
+				this.waypoint.set(Ship.directions[1], this.waypoint.get(Ship.directions[0]));
+				this.waypoint.set(Ship.directions[0], tmp);
+			}
+		} else {
+			//Rotate all values from waypoint 'rotation' amount of times
+			for (let i = 0; i < rotations; i++) {
+				let tmp = this.waypoint.get(Ship.directions[0]);
+				this.waypoint.set(Ship.directions[0], this.waypoint.get(Ship.directions[1]));
+				this.waypoint.set(Ship.directions[1], this.waypoint.get(Ship.directions[2]));
+				this.waypoint.set(Ship.directions[2], this.waypoint.get(Ship.directions[3]));
+				this.waypoint.set(Ship.directions[3], tmp);
+			}
 		}
-		let prevDir = this.waypoint.direction;
-		this.waypoint.direction = Ship.directionsArr[idx];
 
-
-		if (this.followJourney) console.log(`Ships waypoint rotating ${degrees} degrees from direction ${prevDir} to the ${'R' == angle ? 'right' : 'left'}. New direction: ${this.waypoint.direction}`);
+		if (this.followJourney) console.log(`Ships waypoint rotating ${degrees} degrees from [${prevWaypoint}] to the ${'R' == angle ? 'right' : 'left'}. New waypoint: [${[...this.waypoint]}]`);
 	}
 
 	x() {
@@ -66,7 +78,7 @@ class Ship {
 			let { action, value } = instruction;
 			if ('F' == action) {
 				this.move(value);
-			} else if (Ship.directions.has(action)) {
+			} else if (Ship.directions.includes(action)) {
 				this.moveWaypoint(value, action);
 			} else if (Ship.angles.includes(action)) {
 				this.rotate(value, action);
